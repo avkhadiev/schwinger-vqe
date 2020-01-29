@@ -24,6 +24,6 @@ ipython_config.py
 *.out
 
 # configurations and data
-cfg/
-data/
-obs/
+cfg*/
+data*/
+obs*/
