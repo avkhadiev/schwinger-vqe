@@ -10,3 +10,20 @@ pip-delete-this-directory.txt
 
 # pyenv
 .python-version
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Exclusions from Mathematica code for exact diagonalization follow:
+
+# plots and logs
+*.png
+*.log
+*.txt
+*.out
+
+# configurations and data
+cfg/
+data/
+obs/
