@@ -13,8 +13,6 @@ Different parts of the VQE workflow have smaller notebooks. They're not required
 but are convenient if you want to look at an isolated element of the simulation.
 - Superposition.ipynb is the Jupyter with a circuit for producing a superposition of the variational states (ground state and first excited state)
 
-…tate and first excited state
-
 Mathematica code (exact diagonalization)
 
 - savage.nb is the main notebook that performs projection onto
@@ -30,3 +28,11 @@ explicit unitary.
 form of the interpolators is computed in the (concatenated) QC
 computational basis of even and odd parity sectors.
 
+## Tentative plan for the Hackathon (Arthur):
+
+- Catch up on background of VQE: this [reference](https://arxiv.org/pdf/1704.05018.pdf) may be useful.
+- Walk through the existing code together (*VQE.ipynb*) to make sure everyone is up to speed. I'll answer questions about the physical model and the exact solution too, to the best of my ability :)
+- Debrief and discuss options of what we can do next, and how we could split our efforts. The key steps are:  
+  1. Run the code we have on the quantum computer backend and compare against our exact solutions, to see how bad the noise is. A lot of activity on analyzing and mitigating errors could spur from here, and I would love to work on this, perhaps with Chris?
+  2. Try to scale up the simulation to larger volume: answer the question, how does the variational form (the circuit) change when we have 4 or 6 qubits instead of 2? I can provide some more information on this.
+  3. Work on measurements for a *transition matrix* element. I'll give information on that as well.
