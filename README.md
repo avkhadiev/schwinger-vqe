@@ -15,11 +15,13 @@ In (1), we reproduce the results of 1801.03897. In (2), we are ultimately intere
 ### Background information for reference
 The Schwinger model is a (1+1)D theory of quantum electrodynamics (QED). It describes fermions as a two-component spinor field <img src="https://render.githubusercontent.com/render/math?math=\psi">, with mass <img src="https://render.githubusercontent.com/render/math?math=m">, coupled via charge <img src="https://render.githubusercontent.com/render/math?math=g"> to an electromagnetic field <img src="https://render.githubusercontent.com/render/math?math=A_\mu"> in infinite continuum space, with the Lagrangian given by
 
-...
+![](https://raw.githubusercontent.com/avkhadiev/schwinger-vqe/master/hspin.png)
 
 To simulate the system, we need to put in on a finite lattice. Generally, one has to be careful with latticizing the theory with spinor degrees of freedom to correctly retrieve the Dirac equation in the continuum limit; an approach that works, that was used in recent quantum-computer simulations and that we will also employ is a Kogut-Susskind staggered lattice formulation. On a staggered lattice, the two spinor components are put on neighboring sites. Finally, we use a Jordan-Wigner transformation to map the fermionic degrees of freedom to bosonic ones. The final form of the Hamiltonian suitable for simulations on quantum computers is given by 
 
 where <img src="https://render.githubusercontent.com/render/math?math=S"> is the total spin of the spin chain, and the number of spatial sites on the lattice, <img src="https://render.githubusercontent.com/render/math?math=N/2">, is even. The coupling constants are given by <img src="https://render.githubusercontent.com/render/math?math=w = \frac{1}{2a}"> and <img src="https://render.githubusercontent.com/render/math?math=J=\frac{g^2 a}{2}">.
+
+![from 1801.03897](https://raw.githubusercontent.com/avkhadiev/schwinger-vqe/master/schwinger_img.png)
 
 ### Numerical values for parameters
 
@@ -51,7 +53,16 @@ where <img src="https://render.githubusercontent.com/render/math?math=S"> is the
 
 ### Our VQE results show fair agreement with exact results and other references
 - For VQE ran on a simulator, we find excellent agreement with our exact solution.
+
+
+![Even, linear scale on sim](https://raw.githubusercontent.com/avkhadiev/schwinger-vqe/master/even_linear.png)
+
 - For VQE ran on a quantum device (imbq_yorktown), we find fair agreement with the results reported by 1801.03897. 
+
+![Even, linear scale on quantum](https://raw.githubusercontent.com/avkhadiev/schwinger-vqe/master/q_lin.png)
+
+![Results from 1801.03897](https://raw.githubusercontent.com/avkhadiev/schwinger-vqe/master/martin_res.png)
+
 - We found the VQE workflow to be very slow when run on quantum devices through IBM's queuing system, with each iteration queued separately and sequentially. 
 - Some of the inefficiency may come from the SPSA optimizer, whose default parameters are not fine-tuned for the system in question. From studying the convergence properties of the optimizer, both on a simulator and the quantum device, we think that convergence can be achieved significantly faster by tuning SPSA's annealing parameters. 
 
