@@ -6,7 +6,33 @@ We:
   
 In (1), we reproduce the results of 1801.03897. In (2), we are ultimately interested in transition matrix elements such as 
 
-  \langle E_1(\theta^\prime)| \hat{O} | E_2(\theta) \rangle
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\langle E_1(\underline{\theta}_1)\,|\,\hat{O}\,|\,E_0(\underline{\theta}) \rangle">
+ </p>
+ 
+## 0. Briefly the Schwinger Model
+
+### Background information for reference
+The Schwinger model is a (1+1)D theory of quantum electrodynamics (QED). It describes fermions as a two-component spinor field <img src="https://render.githubusercontent.com/render/math?math=\psi">, with mass <img src="https://render.githubusercontent.com/render/math?math=m">, coupled via charge <img src="https://render.githubusercontent.com/render/math?math=g"> to an electromagnetic field <img src="https://render.githubusercontent.com/render/math?math=A_\mu"> in infinite continuum space, with the Lagrangian given by
+
+...
+
+To simulate the system, we need to put in on a finite lattice. Generally, one has to be careful with latticizing the theory with spinor degrees of freedom to correctly retrieve the Dirac equation in the continuum limit; an approach that works, that was used in recent quantum-computer simulations and that we will also employ is a Kogut-Susskind staggered lattice formulation. On a staggered lattice, the two spinor components are put on neighboring sites. Finally, we use a Jordan-Wigner transformation to map the fermionic degrees of freedom to bosonic ones. The final form of the Hamiltonian suitable for simulations on quantum computers is given by 
+
+where <img src="https://render.githubusercontent.com/render/math?math=S"> is the total spin of the spin chain, and the number of spatial sites on the lattice, <img src="https://render.githubusercontent.com/render/math?math=N/2">, is even. The coupling constants are given by <img src="https://render.githubusercontent.com/render/math?math=w = \frac{1}{2a}"> and <img src="https://render.githubusercontent.com/render/math?math=J=\frac{g^2 a}{2}">.
+
+### Numerical values for parameters
+
+- For our simulations (see Mathematica notebooks), we set <img src="https://render.githubusercontent.com/render/math?math=a = 1">, which fixes <img src="https://render.githubusercontent.com/render/math?math=w">.
+- We then specify dimensionless parameters <img src="https://render.githubusercontent.com/render/math?math=m/w"> and <img src="https://render.githubusercontent.com/render/math?math=J/w">.
+- The latter fixes <img src="https://render.githubusercontent.com/render/math?math=g=2\sqrt{J/w}">.
+- We set <img src="https://render.githubusercontent.com/render/math?math=J/w = 5/3 \approx 1.667"> and
+- <img src="https://render.githubusercontent.com/render/math?math=m/w = 5/30 \approx 0.167">.
+
+### The above can be used to relate these parameter to those in Martin's paper:
+- <img src="https://render.githubusercontent.com/render/math?math=x = \frac{1}{(a g)^2} = 0.6.">
+- <img src="https://render.githubusercontent.com/render/math?math=\mu = \frac{2 m}{(a g)^2} = 0.1.">
+- At these values, the predictions should match. Note that in Martin's paper, the Hamiltonian (and eigenenergies) are measured in units of <img src="https://render.githubusercontent.com/render/math?math=J">; to match our measurements with those reported by Martin, multiply their predictions by the value of <img src="https://render.githubusercontent.com/render/math?math=J"> corresponding to the numerical value of their parameters.
 
 ## 1. VQE on a Schwinger model 
 
@@ -70,12 +96,3 @@ explicit unitary.
 - operators.nb is a notebook where the numerical matrix
 form of the interpolators is computed in the (concatenated) QC
 computational basis of even and odd parity sectors.
-
-## Tentative plan for the Hackathon (Arthur):
-
-- Catch up on background of VQE: this [reference](https://arxiv.org/pdf/1704.05018.pdf) may be useful.
-- Walk through the existing code together (*VQE.ipynb*) to make sure everyone is up to speed. I'll answer questions about the physical model and the exact solution too, to the best of my ability :)
-- Debrief and discuss options of what we can do next, and how we could split our efforts. The key steps are:  
-  1. Run the code we have on the quantum computer backend and compare against our exact solutions, to see how bad the noise is. A lot of activity on analyzing and mitigating errors could spur from here, and I would love to work on this, perhaps with Chris?
-  2. Try to scale up the simulation to larger volume: answer the question, how does the variational form (the circuit) change when we have 4 or 6 qubits instead of 2? I can provide some more information on this.
-  3. Work on measurements for a *transition matrix* element. I'll give information on that as well.
